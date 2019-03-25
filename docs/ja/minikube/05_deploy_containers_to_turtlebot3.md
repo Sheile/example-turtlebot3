@@ -430,7 +430,7 @@
         0.2.0: digest: sha256:25a7173cafc797da53a9cacbad53ccf58807253e34fda4600889a3d8746243af size: 1775
         ```
 
-1. ros-master-serviceのインストール
+1. ros-master-serviceの作成
 
     ```
     $ TOKEN=$(cat ${CORE_ROOT}/secrets/auth-tokens.json | jq '.[0].settings.bearer_tokens[0].token' -r)
@@ -457,7 +457,7 @@
         ros-master   ClusterIP   None         <none>        11311/TCP   2m
         ```
 
-1. ros-master-deployment-minikubeのインストール
+1. ros-master-deployment-minikubeの作成
 
     ```
     $ envsubst < ${PJ_ROOT}/ros/ros-master/yaml/ros-master-deployment-minikube.yaml > /tmp/ros-master-deployment-minikube.yaml
@@ -1151,7 +1151,7 @@
     )
     ```
 
-1. fiware-ros-turtlebot3-bridgeのインストール
+1. fiware-ros-turtlebot3-bridgeの作成
 
     ```
     $ envsubst < ${PJ_ROOT}/ros/fiware-ros-turtlebot3-bridge/yaml/fiware-ros-turtlebot3-bridge-secret.yaml > /tmp/fiware-ros-turtlebot3-bridge-secret.yaml
@@ -1180,7 +1180,7 @@
         ros-bridge-secrets   Opaque   1      3m
         ````
 
-1. fiware-ros-turtlebot3-bridge-configmapのインストール
+1. fiware-ros-turtlebot3-bridge-configmapの作成
 
     ```
     $ TOKEN=$(cat ${CORE_ROOT}/secrets/auth-tokens.json | jq '.[0].settings.bearer_tokens[0].token' -r)
@@ -1207,7 +1207,7 @@
         ros-bridge-configmaps   2      4m
         ```
 
-1. fiware-ros-turtlebot3-bridge-serviceのインストール
+1. fiware-ros-turtlebot3-bridge-serviceの作成
 
     ```
     $ TOKEN=$(cat ${CORE_ROOT}/secrets/auth-tokens.json | jq '.[0].settings.bearer_tokens[0].token' -r)
@@ -1234,7 +1234,7 @@
         ros-bridge   ClusterIP   None         <none>        11311/TCP   5m
         ```
 
-1. fiware-ros-turtlebot3-bridge-deployment-minikubeのインストール
+1. fiware-ros-turtlebot3-bridge-deployment-minikubeの作成
 
     ```
     $ envsubst < ${PJ_ROOT}/ros/fiware-ros-turtlebot3-bridge/yaml/fiware-ros-turtlebot3-bridge-deployment-minikube.yaml > /tmp/fiware-ros-turtlebot3-bridge-deployment-minikube.yaml
@@ -1897,7 +1897,7 @@
         0.2.1: digest: sha256:729266f40172d69f5f9ad0afb4ab2fb6948d7f4e5c89e291f7b9a787c7d21dd4 size: 1776
         ```
 
-1. fiware-ros-turtlebot3-operatorのインストール
+1. fiware-ros-turtlebot3-operatorの作成
 
     ```
     $ TOKEN=$(cat ${CORE_ROOT}/secrets/auth-tokens.json | jq '.[0].settings.bearer_tokens[0].token' -r)
@@ -1924,7 +1924,7 @@
         turtlebot3-operator-configmaps   1         18s
         ```
 
-1. fiware-ros-turtlebot3-operator-serviceのインストール
+1. fiware-ros-turtlebot3-operator-serviceの作成
 
     ```
     $ TOKEN=$(cat ${CORE_ROOT}/secrets/auth-tokens.json | jq '.[0].settings.bearer_tokens[0].token' -r)
@@ -1951,7 +1951,7 @@
         turtlebot3-operator   ClusterIP   None         <none>        11311/TCP   2m
         ```
 
-1. fiware-ros-turtlebot3-operator-deployment-minikube-wideのインストール
+1. fiware-ros-turtlebot3-operator-deployment-minikube-wideの作成
 
     ```
     $ envsubst < ${PJ_ROOT}/ros/fiware-ros-turtlebot3-operator/yaml/fiware-ros-turtlebot3-operator-deployment-minikube-wide.yaml > /tmp/fiware-ros-turtlebot3-operator-deployment-minikube-wide.yaml

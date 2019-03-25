@@ -360,7 +360,7 @@
         0.2.0: digest: sha256:cf49498a0e1a59b0f862681956d0acb01d553d182428c9bef2e191064f2f6031 size: 1776
         ```
 
-1. ros-master-serviceのインストール
+1. ros-master-serviceの作成
 
     ```
     $ TOKEN=$(cat ${CORE_ROOT}/secrets/auth-tokens.json | jq '.[0].settings.bearer_tokens[0].token' -r)
@@ -387,7 +387,7 @@
         ros-master   ClusterIP   None         <none>        11311/TCP   3d
         ```
 
-1. ros-master-deployment-acrのインストール
+1. ros-master-deployment-acrの作成
 
     ```
     $ envsubst < ${PJ_ROOT}/ros/ros-master/yaml/ros-master-deployment-acr.yaml > /tmp/ros-master-deployment-acr.yaml
@@ -1107,7 +1107,7 @@
     )
     ```
 
-1. fiware-ros-turtlebot3-bridgeのインストール
+1. fiware-ros-turtlebot3-bridgeの作成
 
     ```
     $ envsubst < ${PJ_ROOT}/ros/fiware-ros-turtlebot3-bridge/yaml/fiware-ros-turtlebot3-bridge-secret.yaml > /tmp/fiware-ros-turtlebot3-bridge-secret.yaml
@@ -1161,7 +1161,7 @@
         type: Opaque
         ```
 
-1. fiware-ros-turtlebot3-bridge-configmapのインストール
+1. fiware-ros-turtlebot3-bridge-configmapの作成
 
     ```
     $ TOKEN=$(cat ${CORE_ROOT}/secrets/auth-tokens.json | jq '.[0].settings.bearer_tokens[0].token' -r)
@@ -1188,7 +1188,7 @@
         ros-bridge-configmaps   2         20h
         ```
 
-1. fiware-ros-turtlebot3-bridge-serviceのインストール
+1. fiware-ros-turtlebot3-bridge-serviceの作成
 
     ```
     $ TOKEN=$(cat ${CORE_ROOT}/secrets/auth-tokens.json | jq '.[0].settings.bearer_tokens[0].token' -r)
@@ -1215,7 +1215,7 @@
         ros-bridge   ClusterIP   None         <none>        11311/TCP   20h
         ```
 
-1. fiware-ros-turtlebot3-bridge-deployment-acrのインストール
+1. fiware-ros-turtlebot3-bridge-deployment-acrの作成
 
     ```
     $ envsubst < ${PJ_ROOT}/ros/fiware-ros-turtlebot3-bridge/yaml/fiware-ros-turtlebot3-bridge-deployment-acr.yaml > /tmp/fiware-ros-turtlebot3-bridge-deployment-acr.yaml
@@ -1885,7 +1885,7 @@
         0.2.1: digest: sha256:40cfb5dbe42a076161aa2403d8829256c2825b1ba0ee89c873088e309e459b8a size: 1776
         ```
 
-1. fiware-ros-turtlebot3-operator-configmapのインストール
+1. fiware-ros-turtlebot3-operator-configmapの作成
 
     ```
     $ TOKEN=$(cat ${CORE_ROOT}/secrets/auth-tokens.json | jq '.[0].settings.bearer_tokens[0].token' -r)
@@ -1912,7 +1912,7 @@
         turtlebot3-operator-configmaps   1         1m
         ```
 
-1. fiware-ros-turtlebot3-operator-serviceのインストール
+1. fiware-ros-turtlebot3-operator-serviceの作成
 
     ```
     $ TOKEN=$(cat ${CORE_ROOT}/secrets/auth-tokens.json | jq '.[0].settings.bearer_tokens[0].token' -r)
@@ -1939,7 +1939,7 @@
         turtlebot3-operator   ClusterIP   None         <none>        11311/TCP   17d
         ```
 
-1. fiware-ros-turtlebot3-operator-deployment-acr-wideのインストール
+1. fiware-ros-turtlebot3-operator-deployment-acr-wideの作成
 
     ```
     $ envsubst < ${PJ_ROOT}/ros/fiware-ros-turtlebot3-operator/yaml/fiware-ros-turtlebot3-operator-deployment-acr-wide.yaml > /tmp/fiware-ros-turtlebot3-operator-deployment-acr-wide.yaml

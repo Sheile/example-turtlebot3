@@ -976,7 +976,7 @@
         ["8.8.8.8", "8.8.4.4"]
     ```
 
-1. kube-dns-confimapのインストール【turtlebot3-pc】
+1. kube-dns-confimapの作成【turtlebot3-pc】
 
     ```
     turtlebot3-pc$ kubectl apply -f /tmp/kube-dns-configmap.yaml
@@ -1490,7 +1490,7 @@
                 key: mqtt_cmd_topic
     ```
 
-1. mqtt-kube-operatorのインストール【turtlebot3-pc】
+1. mqtt-kube-operatorの作成【turtlebot3-pc】
 
     ```
     turtlebot3-pc$ kubectl apply -f /tmp/mqtt-kube-operator.yaml

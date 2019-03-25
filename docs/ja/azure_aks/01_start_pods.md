@@ -69,7 +69,7 @@
 
 ## command proxy serviceの設定
 
-1. cmd-proxy-serviceのインストール
+1. cmd-proxy-serviceの作成
 
     ```
     $ kubectl apply -f controller/cmd-proxy-service.yaml
@@ -81,7 +81,7 @@
         service/cmd-proxy created
         ```
 
-1. cmd-proxy-deploymentのインストール
+1. cmd-proxy-deploymentの作成
 
     ```
     $ envsubst < controller/cmd-proxy-deployment.yaml | kubectl apply -f -
@@ -124,7 +124,7 @@
 
 ## robot visualizationの設定
 
-1. robot-visualization-serviceのインストール
+1. robot-visualization-serviceの作成
 
     ```
     $ kubectl apply -f controller/robot-visualization-service.yaml
@@ -136,7 +136,7 @@
         service/robot-visualization created
         ```
 
-1. robot-visualization-deploymentのインストール
+1. robot-visualization-deploymentの作成
 
     ```
     $ export MONGODB_DATABASE="sth_${FIWARE_SERVICE}"
