@@ -222,7 +222,7 @@
 1. minikubeのインストール【turtlebot3-pc】
 
     ```
-    turtlebot3-pc$ curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.28.2/minikube-linux-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
+    turtlebot3-pc$ curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.34.1/minikube-darwin-amd64 \　&& chmod +x minikube
     ```
 
     - 実行結果（例）
