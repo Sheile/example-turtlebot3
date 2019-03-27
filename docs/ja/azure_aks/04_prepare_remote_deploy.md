@@ -30,6 +30,11 @@
     VirtualBoxを利用する場合は下記を設定
 
     + 3D表示設定を無効化
+
+    virtaulboxの設定画面で設定したい仮想マシンを選択し「ディスプレイ」「3Dアクセラレーションを無効化」のチェックを外す
+
+    ![virtaulbox001](images/virtaulbox/virtualbox001.png)
+
     + .bashrcに環境変数の設定(VirtualBox側)
 
         ```
@@ -190,7 +195,7 @@
         Unable to find image 'hello-world:latest' locally
         latest: Pulling from library/hello-world
         1b930d010525: Pull complete
-        Digest: sha256:2557e3c07ed1e38f26e389462d03ed943586f744621577a99efb77324b0fe535
+        Digest: sha256:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
         Status: Downloaded newer image for hello-world:latest
 
         Hello from Docker!
@@ -433,7 +438,7 @@
     上記の様なエラーが出力された場合は「ネームサーバをkube-dnsに設定」を実施
 
 
-## ネームサーバをkube-dns-configmapに設定  
+## ネームサーバをkube-dnsに設定  
 
 1. kube-dns-configmapファイルの作成
 
@@ -846,13 +851,13 @@
     - 実行結果(例）
 
         ```
-        $ kubectl create configmap mqtt-config --from-literal=mqtt_use_tl=mqtt.fiware-test.work --from-literal=mqtt_port=8883 --from-literal=mqtt_cmd_topic=/deployer/deployer_01
+        $ kubectl create configmap mqtt-config --from-literal=mqtt_use_tl=mqtt.example.com --from-literal=mqtt_port=8883 --from-literal=mqtt_cmd_topic=/deployer/deployer_01
         ```
 
 1. MQTTエンドポイントのConfigmapの設定【turtlebot3-pc】
 
     ```
-    turtlebot3-pc$ kubectl create configmap mqtt-config --from-literal=mqtt_use_tl=mqtt.fiware-test.work --from-literal=mqtt_port=8883 --from-literal=mqtt_cmd_topic=/deployer/deployer_01
+    turtlebot3-pc$ kubectl create configmap mqtt-config --from-literal=mqtt_use_tl=mqtt.example.com --from-literal=mqtt_port=8883 --from-literal=mqtt_cmd_topic=/deployer/deployer_01
     ```
 
     - 実行結果（例）
@@ -998,7 +1003,7 @@
     - 実行結果(例）
 
         ```
-        curl -i -H "Authorization: bearer upiQx3NcixLDYlQo5sW0ExMSnsRgTXwi" -H "Fiware-Service: fiwaredemo" -H "Fiware-Servicepath: /deployer" -H "Content-Type: application/json" https://api.fiware-test.work/orion/v2/entities/deployer_01/attrs?type=deployer -X PATCH -d @-<<__EOS__
+        curl -i -H "Authorization: bearer upiQx3NcixLDYlQo5sW0ExMSnsRgTXwi" -H "Fiware-Service: fiwaredemo" -H "Fiware-Servicepath: /deployer" -H "Content-Type: application/json" https://api.example.com/orion/v2/entities/deployer_01/attrs?type=deployer -X PATCH -d @-<<__EOS__
         {
             "apply": {
                 "value": "{}"
@@ -1028,7 +1033,7 @@
 1. 別ターミナルで作成したコマンドの実行
 
     ```
-    $ curl -i -H "Authorization: bearer upiQx3NcixLDYlQo5sW0ExMSnsRgTXwi" -H "Fiware-Service: fiwaredemo" -H "Fiware-Servicepath: /deployer" -H "Content-Type: application/json" https://api.fiware-test.work/orion/v2/entities/deployer_01/attrs?type=deployer -X PATCH -d @-<<__EOS__
+    $ curl -i -H "Authorization: bearer upiQx3NcixLDYlQo5sW0ExMSnsRgTXwi" -H "Fiware-Service: fiwaredemo" -H "Fiware-Servicepath: /deployer" -H "Content-Type: application/json" https://api.example.com/orion/v2/entities/deployer_01/attrs?type=deployer -X PATCH -d @-<<__EOS__
     {
       "apply": {
         "value": "{}"
@@ -1067,7 +1072,7 @@
 
         ```
         2019-02-27T08:03:44.073Z	INFO	mqtt-kube-operator/main.go:132	start main
-        2019-02-27T08:03:50.510Z	INFO	mqtt-kube-operator/main.go:119	Connected to MQTT Broker(tls://mqtt.fiware-test.work:8883), start loop
+        2019-02-27T08:03:50.510Z	INFO	mqtt-kube-operator/main.go:119	Connected to MQTT Broker(tls://mqtt.example.com:8883), start loop
         2019-02-27T08:23:42.468Z	INFO	handlers/messageHandler.go:108	received message: deployer_01@apply|{}
         2019-02-27T08:23:42.468Z	INFO	handlers/messageHandler.go:136	data: {}
         2019-02-27T08:23:42.468Z	INFO	handlers/messageHandler.go:167	invalid format, skip this message: Object 'Kind' is missing in '{}'

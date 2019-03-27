@@ -89,7 +89,7 @@
     - 実行結果（例）
 
         ```
-        delete /home/fiware/example-turtlebot3/ros/fiware-ros-turtlebot3-operator/yaml/fiware-ros-turtlebot3-operator-deployment-acr-wide.yaml to https://api.fiware-test.work
+        delete /home/fiware/example-turtlebot3/ros/fiware-ros-turtlebot3-operator/yaml/fiware-ros-turtlebot3-operator-deployment-acr-wide.yaml to https://api.example.com
         status_code=204, body=
         ```
 
@@ -117,7 +117,7 @@
     - 実行結果（例）
 
         ```
-        apply /tmp/fiware-ros-turtlebot3-operator-deployment-acr-narrow.yaml to https://api.fiware-test.work
+        apply /tmp/fiware-ros-turtlebot3-operator-deployment-acr-narrow.yaml to https://api.example.com
         status_code=204, body=  
         ```
 
@@ -154,7 +154,7 @@
     - 実行結果（例)
 
         ```
-        delete /home/fiware/example-turtlebot3/ros/fiware-ros-turtlebot3-operator/yaml/fiware-ros-turtlebot3-operator-deployment-acr-narrow.yaml to https://api.fiware-test.work
+        delete /home/fiware/example-turtlebot3/ros/fiware-ros-turtlebot3-operator/yaml/fiware-ros-turtlebot3-operator-deployment-acr-narrow.yaml to https://api.example.com
         status_code=204, body=
         ```
 
@@ -182,7 +182,7 @@
     - 実行結果（例）
 
         ```
-        apply /tmp/fiware-ros-turtlebot3-operator-deployment-acr-wide.yaml to https://api.fiware-test.work
+        apply /tmp/fiware-ros-turtlebot3-operator-deployment-acr-wide.yaml to https://api.example.com
         status_code=204, body=
         ```
 

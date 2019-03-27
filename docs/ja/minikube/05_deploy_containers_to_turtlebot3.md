@@ -2170,6 +2170,105 @@
         [INFO] [1552910884.932732]: [fiware_ros_turtlebot3_operator.attributes_sender:AttributesSender.start] AttributesSender start
         ```
 
+
+## A.turtlebot3シミュレータの設定
+
+1. turtlebot3シミュレータ側のUIDの確認【turtlebot3-pc】
+
+    ```
+    turtlebot3-pc$ echo ${UID}
+    ```
+
+    - 実行結果（例）
+
+        ```
+        1000
+        ```
+
+1. 環境変数の設定
+
+    ```
+    $ export TURTLEBOT3_USER=turtlebot3
+    $ export TURTLEBOT3_UID=1000
+    ```
+
+1. turtlebot3-fakeのビルド
+
+    ```
+    $ docker build -t ${REPOSITORY}/roboticbase/turtlebot3-fake:0.2.0 --build-arg TURTLEBOT3_USER=${TURTLEBOT3_USER} --build-arg TURTLEBOT3_UID=${TURTLEBOT3_UID} ros/turtlebot3-fake
+    ```
+
+1. turtlebot3-fakeのイメージ登録
+
+    ```
+    $ docker push ${REPOSITORY}/roboticbase/turtlebot3-fake:0.2.0
+    ```
+
+1. turtlebot3-fake-serviceの作成
+   
+    ```
+    $ TOKEN=$(cat ${CORE_ROOT}/secrets/auth-tokens.json | jq '.[0].settings.bearer_tokens[0].token' -r)
+    $ ./tools/deploy_yaml.py ${PJ_ROOT}/ros/turtlebot3-fake/yaml/turtlebot3-fake-service.yaml http://${HOST_IPADDR}:8080 ${TOKEN} ${FIWARE_SERVICE} ${DEPLOYER_SERVICEPATH} ${DEPLOYER_TYPE} ${DEPLOYER_ID}
+    ```
+
+1. サービスの起動確認【tutlebot3-pc】
+
+    ```
+    $ kubectl get services -l app=turtlebot3-fake
+    ```
+    - 実行結果（例）
+
+        ```
+        NAME              TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)     AGE
+        turtlebot3-fake   ClusterIP   None         <none>        11311/TCP   11s
+        ```
+
+1. turtlebot3-fake-deployment-minikubeの作成
+
+    ```
+    $ envsubst < ${PJ_ROOT}/ros/turtlebot3-fake/yaml/turtlebot3-fake-deployment-minikube.yaml > /tmp/turtlebot3-fake-deployment-minikube.yaml
+    $ TOKEN=$(cat ${CORE_ROOT}/secrets/auth-tokens.json | jq '.[0].settings.bearer_tokens[0].token' -r)
+    $ ./tools/deploy_yaml.py /tmp/turtlebot3-fake-deployment-minikube.yaml http://${HOST_IPADDR}:8080 ${TOKEN} ${FIWARE_SERVICE} ${DEPLOYER_SERVICEPATH} ${DEPLOYER_TYPE} ${DEPLOYER_ID}
+    $ rm /tmp/turtlebot3-fake-deployment-minikube.yaml
+    ```
+
+1. turtlebot3-fakeのdeployments状態確認【turtlebot3-pc】
+
+    ```
+    turtlebot3-pc$ kubectl get deployments -l app=turtlebot3-fake
+    ```
+
+    - 実行結果（例）
+
+        ```
+        NAME              DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+        turtlebot3-fake   1         1         1            1           29s
+        ```
+
+1. turtlebot3-fakeのpods状態確認【turtlebot3-pc】
+
+    ```
+    turtlebot3-pc$ kubectl get pods -l app=turtlebot3-fake
+
+    ```
+
+    - 実行結果（例）
+
+        ```
+        NAME                              READY     STATUS    RESTARTS   AGE
+        turtlebot3-fake-df8bbc6f5-cpftd   1/1       Running   0          38s
+        ```
+
+1. ログの確認【turtlebot3-pc】
+
+    ```
+    $ kubectl logs -f $(kubectl get pods -l app=turtlebot3-fake -o template --template "{{(index .items 0).metadata.name}}")
+    ```
+
+## A.(alterntive) turtlebot3シミュレータの設定
+
+OpenGLのトラブルが原因でturtlebot3-fakeのポッドが起動しない場合は、以下を実行してください。
+
 ## telepresenceの設定【turtlebot3-pc】
 
 1. telepresenceのリポジトリ登録【turtlebot3-pc】

@@ -63,7 +63,7 @@
     - 実行結果（例）
 
         ```
-        Changing "abelacrsp" to a valid URI of "http://abelacrsp", which is the required format used for service principal names
+        Changing "rbcacrsp" to a valid URI of "http://rbcacrsp", which is the required format used for service principal names
         ACR_USERNAME=xxxxxxxxxx
         ACR_PASSWORD=xxxxxxxxxx
         ```
@@ -77,19 +77,19 @@
     - 実行結果（例）
 
         ```
-        kubectl create secret docker-registry abelacr --docker-server abelacr.azurecr.io --docker-email xxxxx --docker-username xxxxx --docker-password xxxxx
+        kubectl create secret docker-registry rbcacr --docker-server rbcacr.azurecr.io --docker-email xxxxx --docker-username xxxxx --docker-password xxxxx
         ```
 
 1. 表示されたコマンドを実行【turtlebot3-pc】
 
     ```
-    $ kubectl create secret docker-registry abelacr --docker-server abelacr.azurecr.io --docker-email xxxxxxxxxx --docker-username xxxxxxxxxx --docker-password xxxxxxxxxx
+    $ kubectl create secret docker-registry rbcacr --docker-server rbcacr.azurecr.io --docker-email xxxxxxxxxx --docker-username xxxxxxxxxx --docker-password xxxxxxxxxx
     ```
 
     - 実行結果（例）
 
         ```
-        secret/abelacr created
+        secret/rbcacr created
         ```
 
 
@@ -322,7 +322,7 @@
         Removing intermediate container 4344d53f11bc
         ---> 7a70909e7100
         Successfully built 7a70909e7100
-        Successfully tagged abelacr.azurecr.io/roboticbase/ros-master:0.2.0
+        Successfully tagged rbcacr.azurecr.io/roboticbase/ros-master:0.2.0
         ```
 
 1. Azure ACRのログイン
@@ -349,7 +349,7 @@
     - 実行結果（例）
 
         ```
-        The push refers to repository [abelacr.azurecr.io/roboticbase/ros-master]
+        The push refers to repository [rbcacr.azurecr.io/roboticbase/ros-master]
         6283b1a70e44: Pushed
         f46b81fb2353: Pushed
         b56fea77f8fe: Pushed
@@ -370,7 +370,7 @@
     - 実行結果（例）
 
         ```
-        apply /home/fiware/example-turtlebot3/ros/ros-master/yaml/ros-master-service.yaml to https://api.fiware-test.work
+        apply /home/fiware/example-turtlebot3/ros/ros-master/yaml/ros-master-service.yaml to https://api.example.com
         status_code=204, body=
         ```
 
@@ -399,7 +399,7 @@
     - 実行結果（例）
 
         ```
-        apply /tmp/ros-master-deployment-acr.yaml to https://api.fiware-test.work
+        apply /tmp/ros-master-deployment-acr.yaml to https://api.example.com
         status_code=204, body=
         ```
 
@@ -1054,7 +1054,7 @@
         Removing intermediate container 66619cb3d2dd
         ---> f818658cd8d0
         Successfully built f818658cd8d0
-        Successfully tagged abelacr.azurecr.io/roboticbase/fiware-ros-turtlebot3-bridge:0.2.2
+        Successfully tagged rbcacr.azurecr.io/roboticbase/fiware-ros-turtlebot3-bridge:0.2.2
         ```
 
 1. ACRのログイン
@@ -1081,7 +1081,7 @@
     - 実行結果（例）
 
         ```
-        The push refers to repository [abelacr.azurecr.io/roboticbase/fiware-ros-turtlebot3-bridge]
+        The push refers to repository [rbcacr.azurecr.io/roboticbase/fiware-ros-turtlebot3-bridge]
         907bfd21b038: Pushed
         3ab1fe801172: Pushed
         dacf0636941f: Pushed
@@ -1119,7 +1119,7 @@
     - 実行結果（例）
 
         ```
-        apply /tmp/fiware-ros-turtlebot3-bridge-secret.yaml to https://api.fiware-test.work
+        apply /tmp/fiware-ros-turtlebot3-bridge-secret.yaml to https://api.example.com
         status_code=204, body=
         ```
 
@@ -1171,7 +1171,7 @@
     - 実行結果（例）
 
         ```
-        apply /home/fiware/example-turtlebot3/ros/fiware-ros-turtlebot3-bridge/yaml/fiware-ros-turtlebot3-bridge-configmap.yaml to https://api.fiware-test.work
+        apply /home/fiware/example-turtlebot3/ros/fiware-ros-turtlebot3-bridge/yaml/fiware-ros-turtlebot3-bridge-configmap.yaml to https://api.example.com
         status_code=204, body=
         ```
 
@@ -1198,7 +1198,7 @@
     - 実行結果（例）
 
         ```
-        apply /home/fiware/example-turtlebot3/ros/fiware-ros-turtlebot3-bridge/yaml/fiware-ros-turtlebot3-bridge-service.yaml to https://api.fiware-test.work
+        apply /home/fiware/example-turtlebot3/ros/fiware-ros-turtlebot3-bridge/yaml/fiware-ros-turtlebot3-bridge-service.yaml to https://api.example.com
         status_code=204, body=
         ```
 
@@ -1227,7 +1227,7 @@
     - 実行結果（例）
 
         ```
-        apply /home/fiware/example-turtlebot3/ros/fiware-ros-turtlebot3-bridge/yaml/fiware-ros-turtlebot3-bridge-service.yaml to https://api.fiware-test.work
+        apply /home/fiware/example-turtlebot3/ros/fiware-ros-turtlebot3-bridge/yaml/fiware-ros-turtlebot3-bridge-service.yaml to https://api.example.com
         status_code=204, body=
         ```
 
@@ -1847,7 +1847,7 @@
         Removing intermediate container 78470f00468f
         ---> 53d57dca000d
         Successfully built 53d57dca000d
-        Successfully tagged abelacr.azurecr.io/roboticbase/fiware-ros-turtlebot3-operator:0.2.1
+        Successfully tagged rbcacr.azurecr.io/roboticbase/fiware-ros-turtlebot3-operator:0.2.1
         ```
 
 1. Azure ACRにログイン
@@ -1874,7 +1874,7 @@
     - 実行結果（例）
 
         ```
-        The push refers to repository [abelacr.azurecr.io/roboticbase/fiware-ros-turtlebot3-operator]
+        The push refers to repository [rbcacr.azurecr.io/roboticbase/fiware-ros-turtlebot3-operator]
         460097d4a495: Pushed
         d18d38ec7365: Pushed
         82c40192d00f: Pushed
@@ -1895,7 +1895,7 @@
     - 実行結果（例）
 
         ```
-        apply /home/fiware/example-turtlebot3/ros/fiware-ros-turtlebot3-operator/yaml/fiware-ros-turtlebot3-operator-configmap.yaml to https://api.fiware-test.work
+        apply /home/fiware/example-turtlebot3/ros/fiware-ros-turtlebot3-operator/yaml/fiware-ros-turtlebot3-operator-configmap.yaml to https://api.example.com
         status_code=204, body=
         ```
 
@@ -1922,7 +1922,7 @@
     - 実行結果（例）
 
         ```
-        apply /home/fiware/example-turtlebot3/ros/fiware-ros-turtlebot3-operator/yaml/fiware-ros-turtlebot3-operator-service.yaml to https://api.fiware-test.work
+        apply /home/fiware/example-turtlebot3/ros/fiware-ros-turtlebot3-operator/yaml/fiware-ros-turtlebot3-operator-service.yaml to https://api.example.com
         status_code=204, body=
         ```
 
@@ -1951,7 +1951,7 @@
     - 実行結果（例）
 
         ```
-        apply /tmp/fiware-ros-turtlebot3-operator-deployment-acr-wide.yaml to https://api.fiware-test.work
+        apply /tmp/fiware-ros-turtlebot3-operator-deployment-acr-wide.yaml to https://api.example.com
         status_code=204, body=
         ```
 
@@ -2158,7 +2158,111 @@
         [INFO] [1551760354.533086]: [fiware_ros_turtlebot3_operator.attributes_sender:AttributesSender.start] AttributesSender start
         ```
 
-## turtlebot3シミュレータの設定【turtlebot3-pc】
+## A.turtlebot3シミュレータの設定
+
+1. turtlebot3シミュレータ側のUIDの確認【turtlebot3-pc】
+
+    ```
+    turtlebot3-pc$ echo ${UID}
+    ```
+
+    - 実行結果（例）
+
+        ```
+        1000
+        ```
+
+1. 環境変数の設定
+
+    ```
+    $ export TURTLEBOT3_USER=turtlebot3
+    $ export TURTLEBOT3_UID=1000
+    ```
+
+1. turtlebot3-fakeのビルド
+
+    ```
+    $ docker build -t ${REPOSITORY}/roboticbase/turtlebot3-fake:0.2.0 --build-arg TURTLEBOT3_USER=${TURTLEBOT3_USER} --build-arg TURTLEBOT3_UID=${TURTLEBOT3_UID} ros/turtlebot3-fake
+    ```
+
+1. Azure ACRのログイン
+
+    ```
+    $ az acr login --name ${ACR_NAME}
+    ```
+
+1. turtlebot3-fakeのイメージ登録
+
+    ```
+    $ docker push ${REPOSITORY}/roboticbase/turtlebot3-fake:0.2.0
+    ```
+
+1. turtlebot3-fake-serviceの作成
+   
+    ```
+    $ TOKEN=$(cat ${CORE_ROOT}/secrets/auth-tokens.json | jq '.[0].settings.bearer_tokens[0].token' -r)
+    $ ./tools/deploy_yaml.py ${PJ_ROOT}/ros/turtlebot3-fake/yaml/turtlebot3-fake-service.yaml https://api.${DOMAIN} ${TOKEN} ${FIWARE_SERVICE} ${DEPLOYER_SERVICEPATH} ${DEPLOYER_TYPE} ${DEPLOYER_ID}
+    ```
+
+1. サービスの起動確認【tutlebot3-pc】
+
+    ```
+    $ kubectl get services -l app=turtlebot3-fake
+    ```
+    - 実行結果（例）
+
+        ```
+        NAME              TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)     AGE
+        turtlebot3-fake   ClusterIP   None         <none>        11311/TCP   11s
+        ```
+
+1. turtlebot3-fake-deployment-minikubeの作成
+
+    ```
+    $ envsubst < ${PJ_ROOT}/ros/turtlebot3-fake/yaml/turtlebot3-fake-deployment-acr.yaml > /tmp/turtlebot3-fake-deployment-acr.yaml
+    $ TOKEN=$(cat ${CORE_ROOT}/secrets/auth-tokens.json | jq '.[0].settings.bearer_tokens[0].token' -r)
+    $ ./tools/deploy_yaml.py /tmp/turtlebot3-fake-deployment-acr.yaml https://api.${DOMAIN} ${TOKEN} ${FIWARE_SERVICE} ${DEPLOYER_SERVICEPATH} ${DEPLOYER_TYPE} ${DEPLOYER_ID}
+    $ rm /tmp/turtlebot3-fake-deployment-acr.yaml
+    ```
+
+1. turtlebot3-fakeのdeployments状態確認【turtlebot3-pc】
+
+    ```
+    turtlebot3-pc$ kubectl get deployments -l app=turtlebot3-fake
+    ```
+
+    - 実行結果（例）
+
+        ```
+        NAME              DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+        turtlebot3-fake   1         1         1            1           29s
+        ```
+
+1. turtlebot3-fakeのpods状態確認【turtlebot3-pc】
+
+    ```
+    turtlebot3-pc$ kubectl get pods -l app=turtlebot3-fake
+
+    ```
+
+    - 実行結果（例）
+
+        ```
+        NAME                              READY     STATUS    RESTARTS   AGE
+        turtlebot3-fake-df8bbc6f5-cpftd   1/1       Running   0          38s
+        ```
+
+1. ログの確認【turtlebot3-pc】
+
+    ```
+    $ kubectl logs -f $(kubectl get pods -l app=turtlebot3-fake -o template --template "{{(index .items 0).metadata.name}}")
+    ```
+
+## A.(alterntive) turtlebot3シミュレータの設定
+
+OpenGLのトラブルが原因でturtlebot3-fakeのポッドが起動しない場合は、以下を実行してください。
+
+## telepresenceの設定【turtlebot3-pc】
 
 1. telepresenceのリポジトリ登録【turtlebot3-pc】
 

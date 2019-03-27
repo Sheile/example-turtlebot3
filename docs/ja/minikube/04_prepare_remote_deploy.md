@@ -30,6 +30,11 @@
     VirtualBoxを利用する場合は下記を設定
 
     + 3D表示設定を無効化
+
+    virtaulboxの設定画面で設定したい仮想マシンを選択し「ディスプレイ」「3Dアクセラレーションを無効化」のチェックを外す
+
+    ![virtaulbox001](images/virtaulbox/virtualbox001.png)
+
     + .bashrcに環境変数の設定(VirtualBox側)
 
         ```

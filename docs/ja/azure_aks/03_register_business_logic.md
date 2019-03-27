@@ -182,7 +182,7 @@
     - 実行結果（例）
 
       ```
-      mosquitto_pub -h mqtt.fiware-test.work -p 8883 --cafile /home/fiware/core/secrets/DST_Root_CA_X3.pem -d -u iotagent -P password_of_iotagent -t /gamepad/gamepad/attrs -m "2019-02-27T13:55:23.1551243323+0900|button|triangle"
+      mosquitto_pub -h mqtt.example.com -p 8883 --cafile /home/fiware/core/secrets/DST_Root_CA_X3.pem -d -u iotagent -P password_of_iotagent -t /gamepad/gamepad/attrs -m "2019-02-27T13:55:23.1551243323+0900|button|triangle"
       ```
 
 1. エミュレーションコマンドの受信待機
@@ -204,7 +204,7 @@
 1. 別ターミナルで作成したエミュレーションコマンドの実行
 
     ```
-    $ mosquitto_pub -h mqtt.fiware-test.work -p 8883 --cafile /home/fiware/core/secrets/DST_Root_CA_X3.pem -d -u iotagent -P password_of_iotagent -t /gamepad/gamepad/attrs -m "2019-02-27T13:55:23.1551243323+0900|button|triangle"
+    $ mosquitto_pub -h mqtt.example.com -p 8883 --cafile /home/fiware/core/secrets/DST_Root_CA_X3.pem -d -u iotagent -P password_of_iotagent -t /gamepad/gamepad/attrs -m "2019-02-27T13:55:23.1551243323+0900|button|triangle"
     ```
 
     - 実行結果（例）
@@ -383,7 +383,7 @@
     - 実行結果（例）
 
       ```
-      mosquitto_pub -h mqtt.fiware-test.work -p 8883 --cafile /home/fiware/core/secrets/DST_Root_CA_X3.pem -d -u iotagent -P password_of_iotagent -t /robot/turtlebot3/cmdexe -m "turtlebot3@move|executed triangle command"
+      mosquitto_pub -h mqtt.example.com -p 8883 --cafile /home/fiware/core/secrets/DST_Root_CA_X3.pem -d -u iotagent -P password_of_iotagent -t /robot/turtlebot3/cmdexe -m "turtlebot3@move|executed triangle command"
       ```
 
 1. エミュレーションコマンドの受信待機
@@ -405,7 +405,7 @@
 1. 別ターミナルで作成したエミュレーションコマンドの実行
 
     ```
-    $ mosquitto_pub -h mqtt.fiware-test.work -p 8883 --cafile /home/fiware/core/secrets/DST_Root_CA_X3.pem -d -u iotagent -P password_of_iotagent -t /robot/turtlebot3/cmdexe -m "turtlebot3@move|executed triangle command"
+    $ mosquitto_pub -h mqtt.example.com -p 8883 --cafile /home/fiware/core/secrets/DST_Root_CA_X3.pem -d -u iotagent -P password_of_iotagent -t /robot/turtlebot3/cmdexe -m "turtlebot3@move|executed triangle command"
     ```
 
     - 実行結果（例）

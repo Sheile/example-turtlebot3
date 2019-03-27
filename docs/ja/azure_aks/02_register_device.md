@@ -62,13 +62,13 @@
     [
       {
         "cloudName": "AzureCloud",
-        "id": "38ac45e2-5c75-438f-9498-b1a854b2a535",
+        "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
         "isDefault": true,
         "name": "Microsoft Azure",
         "state": "Enabled",
-        "tenantId": "tisstc01.onmicrosoft.com",
+        "tenantId": "example.onmicrosoft.com",
         "user": {
-          "name": "matsui0000@yahoo.co.jp",
+          "name": "example@yexample.com",
           "type": "user"
         }
       }
@@ -86,13 +86,13 @@
         ```
         {
         "environmentName": "AzureCloud",
-        "id": "38ac45e2-5c75-438f-9498-b1a854b2a535",
+        "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
         "isDefault": true,
         "name": "Microsoft Azure",
         "state": "Enabled",
-        "tenantId": "tisstc01.onmicrosoft.com",
+        "tenantId": "example.onmicrosoft.com",
         "user": {
-            "name": "matsui0000@yahoo.co.jp",
+            "name": "example@exampe.com",
             "type": "user"
         }
         }
@@ -787,7 +787,7 @@
     - 実行結果（例）
 
         ```
-        mosquitto_pub -h mqtt.fiware-test.work -p 8883 --cafile /home/fiware/core/secrets/DST_Root_CA_X3.pem -d -u iotagent -P password_of_iotagent -t /gamepad/gamepad/attrs -m "2019-03-22T17:50:46.1553244646+0900|button|circle"
+        mosquitto_pub -h mqtt.example.com -p 8883 --cafile /home/fiware/core/secrets/DST_Root_CA_X3.pem -d -u iotagent -P password_of_iotagent -t /gamepad/gamepad/attrs -m "2019-03-22T17:50:46.1553244646+0900|button|circle"
         ```
 
 1. エミュレーションコマンドの受信待機
@@ -809,7 +809,7 @@
 1. 別ターミナルで作成したエミュレーションコマンドの実行
 
     ```
-    $ mosquitto_pub -h mqtt.fiware-test.work -p 8883 --cafile /home/fiware/core/secrets/DST_Root_CA_X3.pem -d -u iotagent -P password_of_iotagent -t /gamepad/gamepad/attrs -m "2019-02-26T17:22:51.1551169371+0900|button|circle"
+    $ mosquitto_pub -h mqtt.example.com -p 8883 --cafile /home/fiware/core/secrets/DST_Root_CA_X3.pem -d -u iotagent -P password_of_iotagent -t /gamepad/gamepad/attrs -m "2019-02-26T17:22:51.1551169371+0900|button|circle"
     ```
 
     - 実行結果（例）
@@ -890,7 +890,7 @@
     - 実行結果（例）
 
         ```
-        mosquitto_pub -h mqtt.fiware-test.work -p 8883 --cafile /home/fiware/core/secrets/DST_Root_CA_X3.pem -d -u iotagent -P password_of_iotagent -t /robot/turtlebot3/attrs -m "2019-02-26T17:41:17.1551170477+0900|x|0.1|y|0.2|z|0.3|theta|0.4"
+        mosquitto_pub -h mqtt.example.com -p 8883 --cafile /home/fiware/core/secrets/DST_Root_CA_X3.pem -d -u iotagent -P password_of_iotagent -t /robot/turtlebot3/attrs -m "2019-02-26T17:41:17.1551170477+0900|x|0.1|y|0.2|z|0.3|theta|0.4"
         ```
 
 1. エミュレーションコマンドの受信待機
@@ -912,7 +912,7 @@
 1. 別ターミナルで作成したエミュレーションコマンドの実行
 
     ```
-    $ mosquitto_pub -h mqtt.fiware-test.work -p 8883 --cafile /home/fiware/core/secrets/DST_Root_CA_X3.pem -d -u iotagent -P password_of_iotagent -t /robot/turtlebot3/attrs -m "2019-02-26T17:41:17.1551170477+0900|x|0.1|y|0.2|z|0.3|theta|0.4"
+    $ mosquitto_pub -h mqtt.example.com -p 8883 --cafile /home/fiware/core/secrets/DST_Root_CA_X3.pem -d -u iotagent -P password_of_iotagent -t /robot/turtlebot3/attrs -m "2019-02-26T17:41:17.1551170477+0900|x|0.1|y|0.2|z|0.3|theta|0.4"
     ```
 
     - 実行結果（例）
@@ -1078,7 +1078,7 @@
     - 実行結果（例）
 
         ```
-        curl -i -H "Authorization: bearer upiQx3NcixLDYlQo5sW0ExMSnsRgTXwi" -H "Fiware-Service: fiwaredemo" -H "Fiware-Servicepath: /robot" -H "Content-Type: application/json" https://api.fiware-test.work/orion/v2/entities/turtlebot3/attrs?type=robot -X PATCH -d @-<<__EOS__
+        curl -i -H "Authorization: bearer upiQx3NcixLDYlQo5sW0ExMSnsRgTXwi" -H "Fiware-Service: fiwaredemo" -H "Fiware-Servicepath: /robot" -H "Content-Type: application/json" https://api.example.com/orion/v2/entities/turtlebot3/attrs?type=robot -X PATCH -d @-<<__EOS__
         {
             "move": {
             "value": "square"
@@ -1106,7 +1106,7 @@
 1. 別ターミナルで作成したエミュレーションコマンドの実行
 
     ```
-    $ curl -i -H "Authorization: bearer upiQx3NcixLDYlQo5sW0ExMSnsRgTXwi" -H "Fiware-Service: fiwaredemo" -H "Fiware-Servicepath: /robot" -H "Content-Type: application/json" https://api.fiware-test.work/orion/v2/entities/turtlebot3/attrs?type=robot -X PATCH -d @-<<__EOS__
+    $ curl -i -H "Authorization: bearer upiQx3NcixLDYlQo5sW0ExMSnsRgTXwi" -H "Fiware-Service: fiwaredemo" -H "Fiware-Servicepath: /robot" -H "Content-Type: application/json" https://api.example.com/orion/v2/entities/turtlebot3/attrs?type=robot -X PATCH -d @-<<__EOS__
     {
       "move": {
         "value": "square"
@@ -1253,7 +1253,7 @@
     - 実行結果（例）
 
         ```
-        mosquitto_pub -h mqtt.fiware-test.work -p 8883 --cafile /home/fiware/core/secrets/DST_Root_CA_X3.pem -d -u iotagent -P password_of_iotagent -t /robot/turtlebot3/cmdexe -m "turtlebot3@move|executed square command"
+        mosquitto_pub -h mqtt.example.com -p 8883 --cafile /home/fiware/core/secrets/DST_Root_CA_X3.pem -d -u iotagent -P password_of_iotagent -t /robot/turtlebot3/cmdexe -m "turtlebot3@move|executed square command"
         ```
 
 1. コマンド実行結果の受信待機
@@ -1275,7 +1275,7 @@
 1. 別ターミナルで作成したエミュレーションコマンドの実行
 
     ```
-    $ mosquitto_pub -h mqtt.fiware-test.work -p 8883 --cafile /home/fiware/core/secrets/DST_Root_CA_X3.pem -d -u iotagent -P password_of_iotagent -t /robot/turtlebot3/cmdexe -m "turtlebot3@move|executed square command"
+    $ mosquitto_pub -h mqtt.example.com -p 8883 --cafile /home/fiware/core/secrets/DST_Root_CA_X3.pem -d -u iotagent -P password_of_iotagent -t /robot/turtlebot3/cmdexe -m "turtlebot3@move|executed square command"
     ```
 
     - 実行結果（例）
