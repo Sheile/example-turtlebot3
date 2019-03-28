@@ -3,8 +3,105 @@
 
 ## 構築環境(2019年3月15日現在)
 
+# gemepadの準備
 
-# WEBコントローラーでturtlebot3を操作
+gamepadを利用する場合はCの手順、Webコントローラーを利用する場合はDの手順を実施します
+
+## C.gamepadでturtlebot3を操作
+
+## Raspberry Piにgamepadを接続
+
+1. sshでRaspberry Piに接続
+
+1. gamepadコントローラのベースファイルの取得
+
+    ```
+    rasberrypi$ git clone https://github.com/RoboticBase/fiware-gamepad-controller.git
+    ```
+
+## MQTTブローカーの設定
+
+1. 証明書ファイルのコピー
+
+    ```
+    $ scp ${PJ_ROOT}/secrets/DST_Root_CA_X3.pem ${user}@${raspberry_pi}:${repogitory_root}/secrets/ca.crt
+    ```
+
+1. mqttファイルの編集
+
+    ``` 
+    raspberrypi$ conf/pxkwcr-azure.yaml.template conf/pxkwcr-azure.yaml
+
+    raspberrypi$ vi conf/pxkwcr-azure.yaml
+    ```
+
+    ※host,username,passwordの項目を編集してください
+
+    ```
+    name: "FUJIWORK PXKWCR Controller"
+    controller:
+      buttons:
+        - key: 0
+          value: "triangle"
+        - key: 1
+          value: "circle"
+        - key: 2
+          value: "cross"
+        - key: 3
+          value: "square"
+      hats:
+        - x: 0
+          y: 1
+          value: "up"
+        - x: 0
+          y: -1
+          value: "down"
+        - x: 1
+          y: 0
+          value: "right"
+        - x: -1
+          y: 0
+          value: "left"
+    mqtt:
+      host: "${MQTT_HOST}"
+      port: 8883
+      cafile: "secrets/ca.crt"
+      username: "raspberrypi"
+      password: "${RASPI_PASSWORD}"
+      topics:
+        - key: "controller"
+          value: "/gamepad/gamepad/attrs"
+    ```
+
+1. bridge node用のPythonライブラリのインストール
+
+    ```
+    raspoberypi$ pip install -r requirements/common.txt
+    ```
+
+## gamepadの起動
+
+1. gemepadの起動
+
+    ```
+    raspberrypi$ ./main.py pxkwcr-azure
+    ```
+
+    - 実行結果（例）
+
+        ```
+        2018/07/19 14:20:12 [   INFO] src.controller - connected mqtt broker[mqtt.cloudconductor.jp:8883], response_code=0
+        ```
+        ※response_codeが0以外の場合は、pxkwcr-azure.yamlかca.crtあるいは、その両方が無効です
+
+## turtlebot3の動作確認
+
+1. gamepadの「〇」をクリック
+
+1. turtlebot3が移動したことを確認
+
+
+## D.WEBコントローラーでturtlebot3を操作
 
 
 ## 環境設定

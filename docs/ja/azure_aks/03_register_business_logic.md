@@ -63,24 +63,7 @@
       }
     }
     __EOS__
-    {
-      "subject": {
-        "entities": [{
-          "idPattern": "${GAMEPAD_ID}.*",
-          "type": "${GAMEPAD_TYPE}"
-        }],
-        "condition": {
-          "attrs": ["button"]
-        }
-      },
-      "notification": {
-        "http": {
-          "url": "http://cmd-proxy:8888/gamepad/"
-        },
-        "attrs": ["button"]
-      }
-    }
-    __EOS__
+
     ```
 
     - 実行結果（例）

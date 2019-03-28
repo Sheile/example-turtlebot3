@@ -52,6 +52,8 @@
 
 1. Azure ACRにservice principalを作成 
 
+    ※既にservice principalが存在する場合には、service principalを作成する前に削除してください
+
     ```
     $ ACR_ID=$(az acr show --resource-group ${AKS_RG} --name ${ACR_NAME} --query "id" --output tsv)
     $ az ad sp create-for-rbac --scopes ${ACR_ID} --role Reader --name ${ACR_NAME}sp > /tmp/acrsp
@@ -1902,7 +1904,7 @@
 1. fiware-ros-turtlebot3-operator-configmapのconfigmap確認【turtlebot3-pc】
 
     ```
-    turtlebot3-pc$ kubectl get services -l app=turtlebot3-operator
+    turtlebot3-pc$ kubectl get configmaps -l app=turtlebot3-operator
     ```
 
     - 実行結果（例）
@@ -2204,10 +2206,10 @@
     $ ./tools/deploy_yaml.py ${PJ_ROOT}/ros/turtlebot3-fake/yaml/turtlebot3-fake-service.yaml https://api.${DOMAIN} ${TOKEN} ${FIWARE_SERVICE} ${DEPLOYER_SERVICEPATH} ${DEPLOYER_TYPE} ${DEPLOYER_ID}
     ```
 
-1. サービスの起動確認【tutlebot3-pc】
+1. サービスの起動確認【turtlebot3-pc】
 
     ```
-    $ kubectl get services -l app=turtlebot3-fake
+    turtlebot3-pc$ kubectl get services -l app=turtlebot3-fake
     ```
     - 実行結果（例）
 
@@ -2255,7 +2257,7 @@
 1. ログの確認【turtlebot3-pc】
 
     ```
-    $ kubectl logs -f $(kubectl get pods -l app=turtlebot3-fake -o template --template "{{(index .items 0).metadata.name}}")
+    turtlebot3-pc$ kubectl logs -f $(kubectl get pods -l app=turtlebot3-fake -o template --template "{{(index .items 0).metadata.name}}")
     ```
 
 ## A.(alterntive) turtlebot3シミュレータの設定
@@ -2739,3 +2741,99 @@ OpenGLのトラブルが原因でturtlebot3-fakeのポッドが起動しない�
         ... shutting down processing monitor complete
         done
         ```
+
+## B.turtlebot3ロボットの設定
+
+1. 環境変数の設定
+
+    ```
+    $ export TURTLEBOT3_WORKSPACE=/home/turtlebot3/catkin_ws
+    ```
+
+1. turtlebot3-bringupのビルド
+
+    ```
+    $ docker build -t ${REPOSITORY}/roboticbase/turtlebot3-bringup:0.2.0 ros/turtlebot3-bringup
+    ```
+
+1. Azure ACRのログイン
+
+    ```
+    $ az acr login --name ${ACR_NAME}
+    ```
+
+    - 実行結果（例）
+
+        ```
+        Login Succeeded
+        WARNING! Your password will be stored unencrypted in /home/fiware/.docker/config.json.
+        Configure a credential helper to remove this warning. See
+        https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+        ```
+
+1. turtlebot3-bringupのイメージ登録
+
+    ```
+    $ docker push ${REPOSITORY}/roboticbase/turtlebot3-bringup:0.2.0
+    ```
+
+1. turtlebot3-bringup-serviceの作成
+   
+    ```
+    $ TOKEN=$(cat ${CORE_ROOT}/secrets/auth-tokens.json | jq '.[0].settings.bearer_tokens[0].token' -r)
+    $ ./tools/deploy_yaml.py ${PJ_ROOT}/ros/turtlebot3-bringup/yaml/turtlebot3-bringup-service.yaml https://api.${DOMAIN} ${TOKEN} ${FIWARE_SERVICE} ${DEPLOYER_SERVICEPATH} ${DEPLOYER_TYPE} ${DEPLOYER_ID}
+    ```
+
+1. サービスの起動確認【turtlebot3-pc】
+
+    ```
+    turtlebot3-pc$ kubectl get services -l app=turtlebot3-bringup
+    ```
+    - 実行結果（例）
+
+        ```
+        NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)     AGE
+        turtlebot3-bringup   ClusterIP   None         <none>        11311/TCP   13s
+        ```
+
+1. turtlebot3-bringup-deployment-minikubeの作成
+
+    ```
+    $ envsubst < ${PJ_ROOT}/ros/turtlebot3-bringup/yaml/turtlebot3-bringup-deployment-acr.yaml > /tmp/turtlebot3-bringup-deployment-acr.yaml
+    $ TOKEN=$(cat ${CORE_ROOT}/secrets/auth-tokens.json | jq '.[0].settings.bearer_tokens[0].token' -r)
+    $ ./tools/deploy_yaml.py /tmp/turtlebot3-bringup-deployment-acr.yaml https://api.${DOMAIN} ${TOKEN} ${FIWARE_SERVICE} ${DEPLOYER_SERVICEPATH} ${DEPLOYER_TYPE} ${DEPLOYER_ID}
+    $ rm /tmp/turtlebot3-bringup-deployment-acr.yaml
+    ```
+
+1. turtlebot3-bringupのdeployments状態確認【turtlebot3-pc】
+
+    ```
+    turtlebot3-pc$ kubectl get deployments -l app=turtlebot3-bringup
+    ```
+
+    - 実行結果（例）
+
+        ```
+        NAME                 DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+        turtlebot3-bringup   1         1         1            1           1m
+        ```
+
+1. turtlebot3-bringupのpods状態確認【turtlebot3-pc】
+
+    ```
+    turtlebot3-pc$ kubectl get pods -l app=turtlebot3-bringup
+
+    ```
+
+    - 実行結果（例）
+
+        ```
+        NAME                                  READY     STATUS    RESTARTS   AGE
+        turtlebot3-bringup-5c7b59c9b4-c56kj   1/1       Running   0          1m
+        ```
+
+1. ログの確認【turtlebot3-pc】
+
+    ```
+    turtlebot3-pc$ kubectl logs -f $(kubectl get pods -l app=turtlebot3-bringup -o template --template "{{(index .items 0).metadata.name}}")
+    ```

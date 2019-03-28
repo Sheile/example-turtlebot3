@@ -21,9 +21,12 @@
 
 ## turtlebot3の準備 
 
-### turtlebot3シミュレーター用PCの準備
+turtlebot3シミュレータを利用する場合はAの手順、実機のturtlebot3ロボットを利用する場合はBの手順を実施します
 
-1. Ubuntu 16.04を用意  
+### A.turtlebot3シミュレータ用PCの準備
+
+1. Ubuntu 16.04を用意
+
     ※今後、turtlebot3シミュレータ用PCで実行する場合には【turtlebot3-pc】と記載します。
     また【turtlebot3-pc】が記載されていない場合にはcore構築環境で実施します。
 
@@ -112,6 +115,20 @@
     turtlebot3-pc$ cd ~/catkin_ws/src
     turtlebot3-pc$ catkin_make
     ```
+
+### B.turtlebot3ロボットの準備
+
+1. turtlebot3を準備
+
+    ※今後、turtlebot3ロボットに搭載されているPCで実行する場合には【turtlebot3-pc】と記載します。
+    また【turtlebot3-pc】が記載されていない場合にはcore構築環境で実施します。
+
+1. catkin_makeを利用してリポジトリを作成【turtlebot3-pc】
+
+    ```
+    turtlebot3-pc$ catkin_make
+    ```
+
 
 ## 環境設定
 
@@ -216,7 +233,7 @@
         172.16.10.25
         ```
 
-## tutlebot3-pcの設定【turtlebot3-pc】
+## turtlebot3-pcの設定【turtlebot3-pc】
 
 ### dockerの設定【turtlebot3-pc】
 
@@ -963,7 +980,7 @@
     上記の様なエラーが出力された場合は「ネームサーバをkube-dnsに設定」を実施
 
 
-## ネームサーバをkube-dns-configmapに設定【turtlebot3-pc】
+## ネームサーバをkube-dnsに設定【turtlebot3-pc】
 
 1. kube-dns-configmapファイルの作成【turtlebot3-pc】
 

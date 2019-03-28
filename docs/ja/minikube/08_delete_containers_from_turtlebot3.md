@@ -110,13 +110,51 @@
         172.16.10.25
         ```
 
+## A.turtlebot3シミュレータの場合
 
-## turtlebot3コンテナの削除
+1. turtlebot3-fake-deployment-minikubeの削除
+
+    ```
+    $ TOKEN=$(cat ${CORE_ROOT}/secrets/auth-tokens.json | jq '.[0].settings.bearer_tokens[0].token' -r)
+    $ ./tools/deploy_yaml.py --delete ${PJ_ROOT}/ros/turtlebot3-fake/yaml/turtlebot3-fake-deployment-minikube.yaml http://${HOST_IPADDR}:8080 ${TOKEN} ${FIWARE_SERVICE} ${DEPLOYER_SERVICEPATH} ${DEPLOYER_TYPE} ${DEPLOYER_ID}
+    ```
+
+1. turtlebot3-fake-serviceの削除
+
+    ```
+    $ TOKEN=$(cat ${CORE_ROOT}/secrets/auth-tokens.json | jq '.[0].settings.bearer_tokens[0].token' -r)
+    $ ./tools/deploy_yaml.py --delete ${PJ_ROOT}/ros/turtlebot3-fake/yaml/turtlebot3-fake-service.yaml http://${HOST_IPADDR}:8080 ${TOKEN} ${FIWARE_SERVICE} ${DEPLOYER_SERVICEPATH} ${DEPLOYER_TYPE} ${DEPLOYER_ID}
+    ```
+
+## A.(alterntive)turtlebot3シミュレータの場合
 
 1. turtlebot3シミュレータ環境の停止
 
     1. telepresence shellで、exit
     1. port forwadingを閉じる
+
+
+## B.turtlebot3ロボットの場合
+
+1. 環境設定
+
+    ```
+    $ export TURTLEBOT3_WORKSPACE=~/catkin_ws
+    ```
+
+1. turtlebot3-bringup-deployment-minikubeの削除
+
+    ```
+    $ TOKEN=$(cat ${CORE_ROOT}/secrets/auth-tokens.json | jq '.[0].settings.bearer_tokens[0].token' -r)
+    $ ./tools/deploy_yaml.py --delete ${PJ_ROOT}/ros/turtlebot3-bringup/yaml/turtlebot3-bringup-deployment-minikube.yaml http://${HOST_IPADDR}:8080 ${TOKEN} ${FIWARE_SERVICE} ${DEPLOYER_SERVICEPATH} ${DEPLOYER_TYPE} ${DEPLOYER_ID}
+    ```
+
+1. turtlebot3-bringup-serviceの削除
+
+    ```
+    $ TOKEN=$(cat ${CORE_ROOT}/secrets/auth-tokens.json | jq '.[0].settings.bearer_tokens[0].token' -r)
+    $ ./tools/deploy_yaml.py --delete ${PJ_ROOT}/ros/turtlebot3-bringup/yaml/turtlebot3-bringup-service.yaml http://${HOST_IPADDR}:8080 ${TOKEN} ${FIWARE_SERVICE} ${DEPLOYER_SERVICEPATH} ${DEPLOYER_TYPE} ${DEPLOYER_ID}
+    ```
 
 
 ## fiware-ros-turtlebot3-operatoの削除

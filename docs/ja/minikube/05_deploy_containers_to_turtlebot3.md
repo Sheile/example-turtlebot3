@@ -2211,10 +2211,10 @@
     $ ./tools/deploy_yaml.py ${PJ_ROOT}/ros/turtlebot3-fake/yaml/turtlebot3-fake-service.yaml http://${HOST_IPADDR}:8080 ${TOKEN} ${FIWARE_SERVICE} ${DEPLOYER_SERVICEPATH} ${DEPLOYER_TYPE} ${DEPLOYER_ID}
     ```
 
-1. サービスの起動確認【tutlebot3-pc】
+1. サービスの起動確認【turtlebot3-pc】
 
     ```
-    $ kubectl get services -l app=turtlebot3-fake
+    turtlebot3-pc$ kubectl get services -l app=turtlebot3-fake
     ```
     - 実行結果（例）
 
@@ -2262,7 +2262,7 @@
 1. ログの確認【turtlebot3-pc】
 
     ```
-    $ kubectl logs -f $(kubectl get pods -l app=turtlebot3-fake -o template --template "{{(index .items 0).metadata.name}}")
+    turtlebot3-pc$ kubectl logs -f $(kubectl get pods -l app=turtlebot3-fake -o template --template "{{(index .items 0).metadata.name}}")
     ```
 
 ## A.(alterntive) turtlebot3シミュレータの設定
@@ -2842,4 +2842,83 @@ OpenGLのトラブルが原因でturtlebot3-fakeのポッドが起動しない�
         process[rviz-4]: started with pid [25428]
         ```
 
+## B.turtlebot3ロボットの設定
 
+1. 環境変数の設定
+
+    ```
+    $ export TURTLEBOT3_WORKSPACE=/home/turtlebot3/catkin_ws
+    ```
+
+1. turtlebot3-bringupのビルド
+
+    ```
+    $ docker build -t ${REPOSITORY}/roboticbase/turtlebot3-bringup:0.2.0 ros/turtlebot3-bringup
+    ```
+
+1. turtlebot3-bringupのイメージ登録
+
+    ```
+    $ docker push ${REPOSITORY}/roboticbase/turtlebot3-bringup:0.2.0
+    ```
+
+1. turtlebot3-bringup-serviceの作成
+   
+    ```
+    $ TOKEN=$(cat ${CORE_ROOT}/secrets/auth-tokens.json | jq '.[0].settings.bearer_tokens[0].token' -r)
+    $ ./tools/deploy_yaml.py ${PJ_ROOT}/ros/turtlebot3-bringup/yaml/turtlebot3-bringup-service.yaml http://${HOST_IPADDR}:8080 ${TOKEN} ${FIWARE_SERVICE} ${DEPLOYER_SERVICEPATH} ${DEPLOYER_TYPE} ${DEPLOYER_ID}
+    ```
+
+1. サービスの起動確認【turtlebot3-pc】
+
+    ```
+    turtlebot3-pc$ kubectl get services -l app=turtlebot3-bringup
+    ```
+    - 実行結果（例）
+
+        ```
+        NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)     AGE
+        turtlebot3-bringup   ClusterIP   None         <none>        11311/TCP   13s
+        ```
+
+1. turtlebot3-bringup-deployment-minikubeの作成
+
+    ```
+    $ envsubst < ${PJ_ROOT}/ros/turtlebot3-bringup/yaml/turtlebot3-bringup-deployment-minikube.yaml > /tmp/turtlebot3-bringup-deployment-minikube.yaml
+    $ TOKEN=$(cat ${CORE_ROOT}/secrets/auth-tokens.json | jq '.[0].settings.bearer_tokens[0].token' -r)
+    $ ./tools/deploy_yaml.py /tmp/turtlebot3-bringup-deployment-minikube.yaml http://${HOST_IPADDR}:8080 ${TOKEN} ${FIWARE_SERVICE} ${DEPLOYER_SERVICEPATH} ${DEPLOYER_TYPE} ${DEPLOYER_ID}
+    $ rm /tmp/turtlebot3-bringup-deployment-minikube.yaml
+    ```
+
+1. turtlebot3-bringupのdeployments状態確認【turtlebot3-pc】
+
+    ```
+    turtlebot3-pc$ kubectl get deployments -l app=turtlebot3-bringup
+    ```
+
+    - 実行結果（例）
+
+        ```
+        NAME                 DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+        turtlebot3-bringup   1         1         1            1           1m
+        ```
+
+1. turtlebot3-bringupのpods状態確認【turtlebot3-pc】
+
+    ```
+    turtlebot3-pc$ kubectl get pods -l app=turtlebot3-bringup
+
+    ```
+
+    - 実行結果（例）
+
+        ```
+        NAME                                  READY     STATUS    RESTARTS   AGE
+        turtlebot3-bringup-5c7b59c9b4-c56kj   1/1       Running   0          1m
+        ```
+
+1. ログの確認【turtlebot3-pc】
+
+    ```
+    turtlebot3-pc$ kubectl logs -f $(kubectl get pods -l app=turtlebot3-bringup -o template --template "{{(index .items 0).metadata.name}}")
+    ```
