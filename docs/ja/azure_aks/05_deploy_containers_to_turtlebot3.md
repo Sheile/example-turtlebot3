@@ -50,9 +50,24 @@
 
 ## minikubeにturtlebot3のprivate registryを登録
 
-1. Azure ACRにservice principalを作成 
+1. Azure ACRにservice principalを削除
 
     ※既にservice principalが存在する場合には、service principalを作成する前に削除してください
+
+    ```
+    $ EXIST_ACR_ID=$(az ad sp list --display-name ${ACR_NAME}sp --query "[0].appId" -o tsv)
+az ad sp delete --id ${EXIST_ACR_ID}
+    ```
+
+    ```
+    $ ACR_ID=$(az acr show --resource-group ${AKS_RG} --name ${ACR_NAME} --query "id" --output tsv)
+    $ az ad sp create-for-rbac --scopes ${ACR_ID} --role Reader --name ${ACR_NAME}sp > /tmp/acrsp
+    $ export ACR_USERNAME=$(cat /tmp/acrsp | jq .appId -r);echo "ACR_USERNAME=${ACR_USERNAME}"
+    $ export ACR_PASSWORD=$(cat /tmp/acrsp | jq .password -r);echo "ACR_PASSWORD=${ACR_PASSWORD}"
+    $ rm /tmp/acrsp
+    ```
+
+1. Azure ACRにservice principalを作成 
 
     ```
     $ ACR_ID=$(az acr show --resource-group ${AKS_RG} --name ${ACR_NAME} --query "id" --output tsv)
